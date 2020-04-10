@@ -31,4 +31,8 @@ Example:
 
 ## Install
 
-pip install pandas-f
+    pip install pandas-f
+
+## Usage
+
+Just import `pandas_f` to make `.f` extension available.

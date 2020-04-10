@@ -14,6 +14,21 @@
 0  2  3
 1  3  5
 2  4  7
+
+
+Resulting dataframes are concatenated:
+>>> def fn2(df: pd.DataFrame) -> pd.DataFrame:
+...     c = df['a'] + df['b']
+...     r_df = pd.DataFrame({'c': c})
+...     return pd.concat([r_df, r_df + 1])
+>>> input_df.f.map(fn2)
+   c
+0  3
+0  4
+1  5
+1  6
+2  7
+2  8
 """
 import pandas as pd
 import typing
