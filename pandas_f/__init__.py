@@ -69,3 +69,11 @@ class FDataFrameAccessor:
             dataframe = func(pd.DataFrame([row]))
             dataframes.append(dataframe)
         return pd.concat(dataframes)
+
+
+__all__ = [
+    'PandasCategory',
+    'PandasEndofunctor',
+    'FSeriesAccessor',
+    'FDataFrameAccessor',
+]

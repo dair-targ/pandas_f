@@ -19,7 +19,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pandas-f',
-    version='0.0.0',
+    version='0.0.1',
     packages=find_packages(),
     url='http://github.com/dair-targ/pandas_f',
     license='Apache 2.0',
