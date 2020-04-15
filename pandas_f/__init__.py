@@ -50,12 +50,17 @@ class FSeriesAccessor:
     def __init__(self, series: pd.Series):
         self._series: pd.Series = series
 
-    def map(self, func: PandasEndofunctor) -> pd.DataFrame:
-        dataframes = []
+    def __iter__(self):
         for row in self._series:
-            dataframe = func(pd.DataFrame([row]))
-            dataframes.append(dataframe)
-        return pd.concat(dataframes).reset_index(drop=True)
+            yield pd.DataFrame([row])
+
+    def map(self, func: PandasEndofunctor) -> pd.DataFrame:
+        """
+        :param func: A function to be applied to every value from
+        the series, converted into pandas.DataFrame.
+        :return: A concatenated pandas.DataFrame
+        """
+        return pd.concat(map(func, self)).reset_index(drop=True)
 
 
 @pd.api.extensions.register_dataframe_accessor('f')
@@ -63,12 +68,17 @@ class FDataFrameAccessor:
     def __init__(self, dataframe: pd.DataFrame):
         self._dataframe = dataframe
 
-    def map(self, func: PandasEndofunctor) -> pd.DataFrame:
-        dataframes = []
+    def __iter__(self):
         for index, row in self._dataframe.iterrows():
-            dataframe = func(pd.DataFrame([row]))
-            dataframes.append(dataframe)
-        return pd.concat(dataframes)
+            yield pd.DataFrame([row])
+
+    def map(self, func: PandasEndofunctor) -> pd.DataFrame:
+        """
+        :param func: A function to be applied to every row from
+        the dataframe, converted into pandas.DataFrame.
+        :return: A concatenated pandas.DataFrame
+        """
+        return pd.concat(map(func, self))
 
 
 __all__ = [
